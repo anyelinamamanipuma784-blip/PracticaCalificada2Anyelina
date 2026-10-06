@@ -2,8 +2,6 @@
 //  SceneDelegate.swift
 //  apple_lab08_pract02_UIKit
 //
-//  Created by Jaime Gomez on 4/5/25.
-//
 
 import UIKit
 
@@ -11,42 +9,73 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let _ = (scene as? UIWindowScene) else { return }
+        // Los pasteles se ven mejor en modo claro.
+        window?.overrideUserInterfaceStyle = .light
+        configureTabBar()
     }
 
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+    /// Ajusta tabs (títulos, íconos, tercer tab de Resultados) y colores pastel.
+    private func configureTabBar() {
+        guard let tabBarController = window?.rootViewController as? UITabBarController,
+              var controllers = tabBarController.viewControllers else { return }
+
+        let items: [(title: String, icon: String)] = [
+            ("Lista", "list.bullet"),
+            ("Calculadora", "plus.forwardslash.minus")
+        ]
+
+        for (index, item) in items.enumerated() where index < controllers.count {
+            controllers[index].tabBarItem = UITabBarItem(title: item.title,
+                                                         image: UIImage(systemName: item.icon),
+                                                         selectedImage: nil)
+        }
+
+        // Tercer tab: historial de resultados (creado por código)
+        let historyNav = UINavigationController(rootViewController: HistoryController())
+        historyNav.tabBarItem = UITabBarItem(title: "Resultados",
+                                             image: UIImage(systemName: "clock.arrow.circlepath"),
+                                             selectedImage: nil)
+        controllers.append(historyNav)
+        tabBarController.setViewControllers(controllers, animated: false)
+
+        // Tab bar
+        let tabAppearance = UITabBarAppearance()
+        tabAppearance.configureWithOpaqueBackground()
+        tabAppearance.backgroundColor = Theme.card
+        tabAppearance.shadowColor = Theme.separator
+        for layout in [tabAppearance.stackedLayoutAppearance,
+                       tabAppearance.inlineLayoutAppearance,
+                       tabAppearance.compactInlineLayoutAppearance] {
+            layout.selected.iconColor = Theme.accentStrong
+            layout.selected.titleTextAttributes = [.foregroundColor: Theme.accentStrong]
+            layout.normal.iconColor = Theme.textSecondary
+            layout.normal.titleTextAttributes = [.foregroundColor: Theme.textSecondary]
+        }
+        tabBarController.tabBar.standardAppearance = tabAppearance
+        tabBarController.tabBar.scrollEdgeAppearance = tabAppearance
+        tabBarController.tabBar.tintColor = Theme.accentStrong
+
+        // Barras de navegación
+        let navAppearance = UINavigationBarAppearance()
+        navAppearance.configureWithOpaqueBackground()
+        navAppearance.backgroundColor = Theme.background
+        navAppearance.shadowColor = .clear
+        navAppearance.titleTextAttributes = [.foregroundColor: Theme.textPrimary]
+        navAppearance.largeTitleTextAttributes = [.foregroundColor: Theme.textPrimary]
+
+        for case let nav as UINavigationController in controllers {
+            nav.navigationBar.standardAppearance = navAppearance
+            nav.navigationBar.scrollEdgeAppearance = navAppearance
+            nav.navigationBar.compactAppearance = navAppearance
+            nav.navigationBar.tintColor = Theme.accentStrong
+        }
     }
 
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-    }
-
-
+    func sceneDidDisconnect(_ scene: UIScene) {}
+    func sceneDidBecomeActive(_ scene: UIScene) {}
+    func sceneWillResignActive(_ scene: UIScene) {}
+    func sceneWillEnterForeground(_ scene: UIScene) {}
+    func sceneDidEnterBackground(_ scene: UIScene) {}
 }
-

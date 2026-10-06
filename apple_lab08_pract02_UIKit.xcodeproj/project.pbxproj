@@ -15,6 +15,7 @@
 		85A968052DC85E00008D8E5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85A968152DC85E00008D8E5F /* Main.storyboard */; };
 		85A968062DC85E00008D8E5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85A968162DC85E00008D8E5F /* Assets.xcassets */; };
 		85A968072DC85E00008D8E5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85A968172DC85E00008D8E5F /* LaunchScreen.storyboard */; };
+		C764569330757D25005C31C6 /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764569230757D25005C31C6 /* HistoryController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		85A968352DC85E00008D8E5F /* results_screen.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = results_screen.svg; sourceTree = "<group>"; };
 		85A968362DC85E00008D8E5F /* teachers_list_screen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = teachers_list_screen.png; sourceTree = "<group>"; };
 		85A968372DC85E00008D8E5F /* teachers_list_screen.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = teachers_list_screen.svg; sourceTree = "<group>"; };
+		C764569230757D25005C31C6 /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				85A968162DC85E00008D8E5F /* Assets.xcassets */,
 				85A968172DC85E00008D8E5F /* LaunchScreen.storyboard */,
 				85A968182DC85E00008D8E5F /* Info.plist */,
+				C764569230757D25005C31C6 /* HistoryController.swift */,
 			);
 			path = apple_lab08_pract02_UIKit;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C764569330757D25005C31C6 /* HistoryController.swift in Sources */,
 				85A968032DC85E00008D8E5F /* TeacherController.swift in Sources */,
 				85A968042DC85E00008D8E5F /* CalculatorController.swift in Sources */,
 				85A968012DC85E00008D8E5F /* AppDelegate.swift in Sources */,
